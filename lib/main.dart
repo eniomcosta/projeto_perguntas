@@ -3,13 +3,24 @@ import 'package:flutter/material.dart';
 
 main() => runApp(PerguntasApp());
 
-class PerguntasApp extends StatelessWidget {
-  final perguntas = [
-    "Primeira pergunta?",
-    "Segunda pergunta?",
-  ];
+class PerguntasAppState extends State<PerguntasApp> {
+  var perguntaSelecionada = 0;
+
+  void responder() {
+    setState(() {
+      perguntaSelecionada++;
+    });
+
+    print(perguntaSelecionada);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final perguntas = [
+      "Primeira pergunta?",
+      "Segunda pergunta?",
+    ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -17,22 +28,29 @@ class PerguntasApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(perguntas[0]),
+            Text(perguntas[perguntaSelecionada]),
             RaisedButton(
               child: Text("Resposta 1"),
-              onPressed: null,
+              onPressed: responder,
             ),
             RaisedButton(
               child: Text("Resposta 2"),
-              onPressed: null,
+              onPressed: responder,
             ),
             RaisedButton(
               child: Text("Resposta 3"),
-              onPressed: null,
+              onPressed: responder,
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class PerguntasApp extends StatefulWidget {
+  @override
+  PerguntasAppState createState() {
+    return PerguntasAppState();
   }
 }
